@@ -77,3 +77,14 @@ body {
   min-height: 300px; /* puste miejsce na przyszłe skrzynki */
 }
 
+.balance {
+  padding: 6px 14px;
+  background-color: #1f4b2e; /* zielony jak w inspiracji */
+  border-radius: 999px;
+  color: #c8f7c5;
+  font-weight: 600;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
