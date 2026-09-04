@@ -82,40 +82,35 @@ sellAllBtn.addEventListener("click", () => {
   renderInventory();
 });
 
-// --- Sekcja skrzynki ---
-const openButtons = document.querySelectorAll(".open-btn");
-const fastOpenBtn = document.getElementById("fast-open");
-const caseResult = document.getElementById("case-result");
+// --- Sekcja skrzynki (miniatura + pełny widok) ---
+const casePreview = document.getElementById("case-preview");
+const caseOpen = document.getElementById("case-open");
+const caseClick = document.getElementById("case-click");
+const backToCases = document.getElementById("back-to-cases");
+const openCaseBtn = document.getElementById("open-case");
 const casePrice = 20;
 
-// Funkcja otwierania skrzynki
-function openCase(count, fast = false) {
-  const totalCost = casePrice * count;
-
-  if (userBalance < totalCost) {
-    caseResult.textContent = "❌ Masz za mało pieniędzy!";
-    return;
-  }
-
-  userBalance -= totalCost;
-  localStorage.setItem("balance", userBalance);
-  balance.textContent = `${userBalance.toFixed(2)} zł`;
-
-  if (fast) {
-    caseResult.textContent = `⚡ Otworzyłeś ${count}x Tanią Skrzynię (Fast Open)!`;
-  } else {
-    caseResult.textContent = `🎁 Otworzyłeś ${count}x Tanią Skrzynię!`;
-  }
-}
-
-// Obsługa przycisków
-openButtons.forEach(btn => {
-  btn.addEventListener("click", () => {
-    const count = parseInt(btn.dataset.count);
-    openCase(count);
-  });
+// Kliknięcie skrzynki → przejście do widoku otwarcia
+caseClick.addEventListener("click", () => {
+  casePreview.style.display = "none";
+  caseOpen.style.display = "block";
 });
 
-fastOpenBtn.addEventListener("click", () => {
-  openCase(1, true);
+// Powrót do skrzynek
+backToCases.addEventListener("click", (e) => {
+  e.preventDefault();
+  caseOpen.style.display = "none";
+  casePreview.style.display = "block";
+});
+
+// Otwieranie skrzynki
+openCaseBtn.addEventListener("click", () => {
+  if (userBalance < casePrice) {
+    alert("Masz za mało pieniędzy!");
+    return;
+  }
+  userBalance -= casePrice;
+  localStorage.setItem("balance", userBalance);
+  balance.textContent = `${userBalance.toFixed(2)} zł`;
+  alert("🎁 Skrzynka otwarta! (tu będzie animacja)");
 });
