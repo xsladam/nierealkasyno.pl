@@ -6,7 +6,7 @@ const settings = document.getElementById("settings");
 // Sprawdź, czy użytkownik jest zalogowany
 const isLogged = localStorage.getItem("logged");
 
-// Jeśli zalogowany → pokaż GUI, ukryj login
+// Jeśli zalogowany → pokaż GUI
 if (isLogged) {
   loginBtn.style.display = "none";
   balance.style.display = "flex";
@@ -35,4 +35,3 @@ loginBtn.addEventListener("click", () => {
 
   balance.textContent = localStorage.getItem("balance");
 });
-
