@@ -1,20 +1,36 @@
-<nav class="navbar">
-  <div class="nav-left">
-    <a href="#" class="active">Skrzynki</a>
-    <a href="#">Upgrader</a>
-    <a href="#">Case Battle</a>
-    <a href="#">Exchanger</a>
-  </div>
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <title>Symulator skrzynek</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
-  <div class="nav-right" id="nav-right">
-    <!-- Jeśli nie zalogowany → pojawi się ten przycisk -->
-    <button id="steam-login" class="login-btn">Zaloguj przez Steam</button>
+  <nav class="navbar">
+    <div class="nav-left">
+      <a href="#" class="active">Skrzynki</a>
+      <a href="#">Upgrader</a>
+      <a href="#">Case Battle</a>
+      <a href="#">Exchanger</a>
+    </div>
 
-    <!-- Jeśli zalogowany → pojawi się to -->
-    <div class="balance" id="balance" style="display:none;">0,00</div>
-    <div class="avatar" id="avatar" style="display:none;"></div>
-    <div class="settings" id="settings" style="display:none;"></div>
-  </div>
-</nav>
+    <div class="nav-right">
+      <!-- Pokazywane tylko gdy NIE zalogowany -->
+      <button id="steam-login" class="login-btn">Zaloguj przez Steam</button>
 
-<script src="script.js"></script>
+      <!-- Pokazywane tylko gdy zalogowany -->
+      <div class="balance" id="balance" style="display:none;">0,00</div>
+      <div class="avatar" id="avatar" style="display:none;"></div>
+      <div class="settings" id="settings" style="display:none;"></div>
+    </div>
+  </nav>
+
+  <section class="cases">
+    <h2>Regular Cases</h2>
+    <div class="case-grid"></div>
+  </section>
+
+  <script src="script.js"></script>
+</body>
+</html>
