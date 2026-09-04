@@ -5,7 +5,7 @@ body {
   color: #fff;
 }
 
-/* Pasek nawigacji */
+/* NAVBAR */
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -22,10 +22,7 @@ body {
   transition: color 0.3s;
 }
 
-.nav-left a.active {
-  color: #fff;
-}
-
+.nav-left a.active,
 .nav-left a:hover {
   color: #fff;
 }
@@ -36,14 +33,13 @@ body {
   gap: 15px;
 }
 
-/* Login button */
+/* LOGIN */
 .login-btn {
   background-color: #1b2838;
   color: #c7d5e0;
   padding: 10px 18px;
   border: none;
   border-radius: 6px;
-  font-size: 14px;
   cursor: pointer;
   transition: 0.2s;
 }
@@ -52,40 +48,34 @@ body {
   background-color: #2a475e;
 }
 
-/* Balans */
+/* BALANCE */
 .balance {
   padding: 6px 14px;
   background-color: #1f4b2e;
   border-radius: 999px;
   color: #c8f7c5;
   font-weight: 600;
-  font-size: 14px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
-/* Avatar = flaga Polski */
+/* AVATAR */
 .avatar {
   width: 40px;
   height: 40px;
   border-radius: 50%;
   background-image: url('https://flagcdn.com/w320/pl.png');
   background-size: cover;
-  background-position: center;
   border: 2px solid white;
   cursor: pointer;
 }
 
-/* Wyśrodkowany napis Regular Cases */
+/* REGULAR CASES TITLE */
 .cases h2 {
   font-size: 24px;
-  color: #cdd9f0;
   text-align: center;
   margin-top: 20px;
 }
 
-/* Inventory GUI */
+/* INVENTORY */
 .inventory {
   position: fixed;
   top: 80px;
@@ -95,38 +85,6 @@ body {
   background-color: #0b1f45;
   border-radius: 10px;
   padding: 20px;
-  box-shadow: 0 0 20px rgba(0,0,0,0.5);
-}
-
-.inventory-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
-}
-
-.sell-btn {
-  background-color: #1f4b2e;
-  color: #c8f7c5;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  font-weight: 600;
-  transition: 0.2s;
-}
-
-.sell-btn:hover {
-  background-color: #2b6e3f;
-}
-
-.sort-select {
-  background-color: #1b2838;
-  color: #c7d5e0;
-  padding: 8px 12px;
-  border: none;
-  border-radius: 6px;
-  font-size: 14px;
 }
 
 .inventory-items {
@@ -137,37 +95,33 @@ body {
 
 .item {
   background-color: #132b5c;
-  border-radius: 8px;
   padding: 10px;
+  border-radius: 8px;
   text-align: center;
-  color: #cdd9f0;
-  font-size: 14px;
 }
 
-/* --- SKRZYNKA --- */
-
-.case-container {
+/* MINIATURA SKRZYNKI */
+.case-preview {
   text-align: center;
   margin-top: 40px;
-}
-
-.case-title {
-  font-size: 26px;
-  color: #cdd9f0;
-  margin-bottom: 15px;
 }
 
 .case-box {
   display: inline-block;
   background-color: #0b1f45;
-  border-radius: 10px;
   padding: 20px;
+  border-radius: 10px;
   box-shadow: 0 0 15px rgba(0,0,0,0.4);
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.case-box:hover {
+  transform: scale(1.05);
 }
 
 .case-image {
   width: 160px;
-  height: auto;
   border-radius: 8px;
 }
 
@@ -177,28 +131,49 @@ body {
   color: #c8f7c5;
 }
 
-.open-options {
-  margin-top: 20px;
+/* PEŁNY WIDOK OTWARCIA */
+.case-open {
+  text-align: center;
+  margin-top: 40px;
 }
 
-.open-btn, .fast-btn {
+.back-link {
+  display: inline-block;
+  margin-bottom: 20px;
+  color: #9bb0d1;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.back-link:hover {
+  color: #fff;
+}
+
+.case-roll {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin: 20px 0;
+}
+
+.case-roll .item {
+  background-color: #132b5c;
+  padding: 10px;
+  border-radius: 8px;
+  width: 120px;
+}
+
+/* BUTTONY */
+.open-btn {
   background-color: #1b2838;
   color: #c7d5e0;
+  padding: 10px 18px;
   border: none;
   border-radius: 6px;
-  padding: 10px 18px;
-  margin: 5px;
   cursor: pointer;
-  font-weight: 600;
-  transition: 0.2s;
+  margin-top: 10px;
 }
 
-.open-btn:hover, .fast-btn:hover {
+.open-btn:hover {
   background-color: #2a475e;
-}
-
-.case-result {
-  margin-top: 25px;
-  font-size: 16px;
-  color: #cdd9f0;
 }
