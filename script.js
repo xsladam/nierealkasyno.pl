@@ -6,6 +6,7 @@ const inventoryGUI = document.getElementById("inventory-gui");
 const inventoryItems = document.getElementById("inventory-items");
 const sellAllBtn = document.getElementById("sell-all");
 const sortSelect = document.getElementById("sort-items");
+const navCases = document.getElementById("nav-cases");
 
 let inventory = [];
 let userBalance = parseFloat(localStorage.getItem("balance")) || 0;
@@ -34,11 +35,16 @@ loginBtn.addEventListener("click", () => {
   balance.textContent = `${userBalance.toFixed(2)} zł`;
 });
 
-// Kliknięcie avatara → otwiera GUI ekwipunku (z warunkiem)
+// Kliknięcie avatara → otwiera GUI ekwipunku
 avatar.addEventListener("click", () => {
   const isHidden = inventoryGUI.style.display === "none" || inventoryGUI.style.display === "";
   inventoryGUI.style.display = isHidden ? "block" : "none";
   if (isHidden) renderInventory();
+});
+
+// Kliknięcie "Skrzynki" → zamyka ekwipunek
+navCases.addEventListener("click", () => {
+  inventoryGUI.style.display = "none";
 });
 
 // Renderowanie ekwipunku
@@ -75,17 +81,3 @@ sellAllBtn.addEventListener("click", () => {
   inventory = [];
   renderInventory();
 });
-
-// Kliknięcie "Skrzynki" zamyka ekwipunek
-const navCases = document.getElementById("nav-cases");
-navCases.addEventListener("click", () => {
-  inventoryGUI.style.display = "none";
-});
-
-// Testowe przedmioty (tymczasowo)
-inventory = [
-  { id: 1, name: "Nóż", value: 120.00 },
-  { id: 2, name: "Karabin", value: 80.00 },
-  { id: 3, name: "Pistolet", value: 45.00 },
-  { id: 4, name: "Rękawice", value: 60.00 }
-];
