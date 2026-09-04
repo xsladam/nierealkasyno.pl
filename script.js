@@ -78,3 +78,9 @@ sellAllBtn.addEventListener("click", () => {
 // Testowe przedmioty (tymczasowo)
 inventory = [
   { id: 1, name: "Nóż", value: 120.00 },
+  { id: 2, name: "Karabin", value: 80.00 },
+  { id: 3, name: "Pistolet", value: 45.00 },
+  { id: 4, name: "Rękawice", value: 60.00 }
+];
+
+renderInventory();
