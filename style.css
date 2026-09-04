@@ -5,7 +5,7 @@ body {
   color: #fff;
 }
 
-/* Pasek nawigacji */
+/* Navbar */
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -30,7 +30,6 @@ body {
   color: #fff;
 }
 
-/* Prawa strona */
 .nav-right {
   display: flex;
   align-items: center;
@@ -75,35 +74,64 @@ body {
   background-size: cover;
   background-position: center;
   border: 2px solid white;
+  cursor: pointer;
 }
 
-/* Ustawienia */
-.settings {
-  width: 35px;
-  height: 35px;
-  background-color: #0f2d5c;
-  border-radius: 8px;
-  background-image: url('https://cdn-icons-png.flaticon.com/512/3524/3524659.png');
-  background-size: 60%;
-  background-repeat: no-repeat;
-  background-position: center;
+/* Inventory GUI */
+.inventory {
+  position: fixed;
+  top: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  background-color: #0b1f45;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.5);
 }
 
-/* Sekcja skrzynek */
-.cases {
-  text-align: center;
-  margin-top: 60px;
+.inventory-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
 }
 
-.cases h2 {
-  font-size: 24px;
-  color: #cdd9f0;
+.sell-btn {
+  background-color: #1f4b2e;
+  color: #c8f7c5;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.2s;
 }
 
-.case-grid {
+.sell-btn:hover {
+  background-color: #2b6e3f;
+}
+
+.sort-select {
+  background-color: #1b2838;
+  color: #c7d5e0;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.inventory-items {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 20px;
-  margin: 40px;
-  min-height: 300px;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 15px;
+}
+
+.item {
+  background-color: #132b5c;
+  border-radius: 8px;
+  padding: 10px;
+  text-align: center;
+  color: #cdd9f0;
+  font-size: 14px;
 }
