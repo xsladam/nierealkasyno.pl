@@ -135,3 +135,11 @@ body {
   color: #cdd9f0;
   font-size: 14px;
 }
+
+/* Wyśrodkowany napis Regular Cases */
+.cases h2 {
+  font-size: 24px;
+  color: #cdd9f0;
+  text-align: center;
+  margin-top: 20px;
+}
