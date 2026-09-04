@@ -29,3 +29,4 @@ loginBtn.addEventListener("click", () => {
   }
   loginBtn.style.display = "none";
   balance.style.display = "flex";
+});
