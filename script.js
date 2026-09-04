@@ -76,6 +76,12 @@ sellAllBtn.addEventListener("click", () => {
   renderInventory();
 });
 
+// Kliknięcie "Skrzynki" zamyka ekwipunek
+const navCases = document.getElementById("nav-cases");
+navCases.addEventListener("click", () => {
+  inventoryGUI.style.display = "none";
+});
+
 // Testowe przedmioty (tymczasowo)
 inventory = [
   { id: 1, name: "Nóż", value: 120.00 },
