@@ -16,10 +16,7 @@
     </div>
 
     <div class="nav-right">
-      <!-- Pokazywane gdy NIE zalogowany -->
       <button id="steam-login" class="login-btn">Zaloguj przez Steam</button>
-
-      <!-- Pokazywane gdy zalogowany -->
       <div class="balance" id="balance" style="display:none;">0,00</div>
       <div class="avatar" id="avatar" style="display:none;"></div>
       <div class="settings" id="settings" style="display:none;"></div>
@@ -30,6 +27,18 @@
     <h2>Regular Cases</h2>
     <div class="case-grid"></div>
   </section>
+
+  <!-- GUI ekwipunku -->
+  <div id="inventory-gui" class="inventory" style="display:none;">
+    <div class="inventory-header">
+      <button id="sell-all" class="sell-btn">Sprzedaj wszystko</button>
+      <select id="sort-items" class="sort-select">
+        <option value="newest">Od najnowszych</option>
+        <option value="expensive">Od najdroższych</option>
+      </select>
+    </div>
+    <div id="inventory-items" class="inventory-items"></div>
+  </div>
 
   <script src="script.js"></script>
 </body>
