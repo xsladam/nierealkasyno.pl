@@ -65,7 +65,7 @@ body {
   justify-content: center;
 }
 
-/* Avatar = flaga Polski 🇵🇱 */
+/* Avatar = flaga Polski */
 .avatar {
   width: 40px;
   height: 40px;
@@ -75,6 +75,14 @@ body {
   background-position: center;
   border: 2px solid white;
   cursor: pointer;
+}
+
+/* Wyśrodkowany napis Regular Cases */
+.cases h2 {
+  font-size: 24px;
+  color: #cdd9f0;
+  text-align: center;
+  margin-top: 20px;
 }
 
 /* Inventory GUI */
@@ -136,10 +144,61 @@ body {
   font-size: 14px;
 }
 
-/* Wyśrodkowany napis Regular Cases */
-.cases h2 {
-  font-size: 24px;
-  color: #cdd9f0;
+/* --- SKRZYNKA --- */
+
+.case-container {
   text-align: center;
+  margin-top: 40px;
+}
+
+.case-title {
+  font-size: 26px;
+  color: #cdd9f0;
+  margin-bottom: 15px;
+}
+
+.case-box {
+  display: inline-block;
+  background-color: #0b1f45;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.4);
+}
+
+.case-image {
+  width: 160px;
+  height: auto;
+  border-radius: 8px;
+}
+
+.case-price {
+  margin-top: 10px;
+  font-weight: 600;
+  color: #c8f7c5;
+}
+
+.open-options {
   margin-top: 20px;
+}
+
+.open-btn, .fast-btn {
+  background-color: #1b2838;
+  color: #c7d5e0;
+  border: none;
+  border-radius: 6px;
+  padding: 10px 18px;
+  margin: 5px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.2s;
+}
+
+.open-btn:hover, .fast-btn:hover {
+  background-color: #2a475e;
+}
+
+.case-result {
+  margin-top: 25px;
+  font-size: 16px;
+  color: #cdd9f0;
 }
