@@ -81,3 +81,41 @@ sellAllBtn.addEventListener("click", () => {
   inventory = [];
   renderInventory();
 });
+
+// --- Sekcja skrzynki ---
+const openButtons = document.querySelectorAll(".open-btn");
+const fastOpenBtn = document.getElementById("fast-open");
+const caseResult = document.getElementById("case-result");
+const casePrice = 20;
+
+// Funkcja otwierania skrzynki
+function openCase(count, fast = false) {
+  const totalCost = casePrice * count;
+
+  if (userBalance < totalCost) {
+    caseResult.textContent = "❌ Masz za mało pieniędzy!";
+    return;
+  }
+
+  userBalance -= totalCost;
+  localStorage.setItem("balance", userBalance);
+  balance.textContent = `${userBalance.toFixed(2)} zł`;
+
+  if (fast) {
+    caseResult.textContent = `⚡ Otworzyłeś ${count}x Tanią Skrzynię (Fast Open)!`;
+  } else {
+    caseResult.textContent = `🎁 Otworzyłeś ${count}x Tanią Skrzynię!`;
+  }
+}
+
+// Obsługa przycisków
+openButtons.forEach(btn => {
+  btn.addEventListener("click", () => {
+    const count = parseInt(btn.dataset.count);
+    openCase(count);
+  });
+});
+
+fastOpenBtn.addEventListener("click", () => {
+  openCase(1, true);
+});
