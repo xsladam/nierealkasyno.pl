@@ -11,7 +11,7 @@ const navCases = document.getElementById("nav-cases");
 let inventory = [];
 let userBalance = parseFloat(localStorage.getItem("balance")) || 0;
 
-// Sprawdź logowanie
+// Logowanie
 const isLogged = localStorage.getItem("logged");
 if (isLogged) {
   loginBtn.style.display = "none";
@@ -21,7 +21,6 @@ if (isLogged) {
   balance.textContent = `${userBalance.toFixed(2)} zł`;
 }
 
-// Logowanie
 loginBtn.addEventListener("click", () => {
   localStorage.setItem("logged", "true");
   if (!localStorage.getItem("balance")) {
@@ -30,87 +29,3 @@ loginBtn.addEventListener("click", () => {
   }
   loginBtn.style.display = "none";
   balance.style.display = "flex";
-  avatar.style.display = "block";
-  settings.style.display = "block";
-  balance.textContent = `${userBalance.toFixed(2)} zł`;
-});
-
-// Kliknięcie avatara → otwiera GUI ekwipunku
-avatar.addEventListener("click", () => {
-  const isHidden = inventoryGUI.style.display === "none" || inventoryGUI.style.display === "";
-  inventoryGUI.style.display = isHidden ? "block" : "none";
-  if (isHidden) renderInventory();
-});
-
-// Kliknięcie "Skrzynki" → zamyka ekwipunek
-navCases.addEventListener("click", () => {
-  inventoryGUI.style.display = "none";
-});
-
-// Renderowanie ekwipunku
-function renderInventory() {
-  inventoryItems.innerHTML = "";
-  if (inventory.length === 0) {
-    inventoryItems.innerHTML = "<p>Twój ekwipunek jest pusty. Otwórz parę skrzynek!</p>";
-    return;
-  }
-  inventory.forEach(item => {
-    const div = document.createElement("div");
-    div.classList.add("item");
-    div.textContent = `${item.name} (${item.value.toFixed(2)} zł)`;
-    inventoryItems.appendChild(div);
-  });
-}
-
-// Sortowanie
-sortSelect.addEventListener("change", () => {
-  if (sortSelect.value === "newest") {
-    inventory.sort((a, b) => b.id - a.id);
-  } else if (sortSelect.value === "expensive") {
-    inventory.sort((a, b) => b.value - a.value);
-  }
-  renderInventory();
-});
-
-// Sprzedaj wszystko
-sellAllBtn.addEventListener("click", () => {
-  const totalValue = inventory.reduce((sum, item) => sum + item.value, 0);
-  userBalance += totalValue;
-  localStorage.setItem("balance", userBalance);
-  balance.textContent = `${userBalance.toFixed(2)} zł`;
-  inventory = [];
-  renderInventory();
-});
-
-// --- Sekcja skrzynki (miniatura + pełny widok) ---
-const casePreview = document.getElementById("case-preview");
-const caseOpen = document.getElementById("case-open");
-const caseClick = document.getElementById("case-click");
-const backToCases = document.getElementById("back-to-cases");
-const openCaseBtn = document.getElementById("open-case");
-const casePrice = 20;
-
-// Kliknięcie skrzynki → przejście do widoku otwarcia
-caseClick.addEventListener("click", () => {
-  casePreview.style.display = "none";
-  caseOpen.style.display = "block";
-});
-
-// Powrót do skrzynek
-backToCases.addEventListener("click", (e) => {
-  e.preventDefault();
-  caseOpen.style.display = "none";
-  casePreview.style.display = "block";
-});
-
-// Otwieranie skrzynki
-openCaseBtn.addEventListener("click", () => {
-  if (userBalance < casePrice) {
-    alert("Masz za mało pieniędzy!");
-    return;
-  }
-  userBalance -= casePrice;
-  localStorage.setItem("balance", userBalance);
-  balance.textContent = `${userBalance.toFixed(2)} zł`;
-  alert("🎁 Skrzynka otwarta! (tu będzie animacja)");
-});
