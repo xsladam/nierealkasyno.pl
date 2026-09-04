@@ -34,10 +34,11 @@ loginBtn.addEventListener("click", () => {
   balance.textContent = `${userBalance.toFixed(2)} zł`;
 });
 
-// Kliknięcie avatara → otwiera GUI ekwipunku
+// Kliknięcie avatara → otwiera GUI ekwipunku (z warunkiem)
 avatar.addEventListener("click", () => {
-  inventoryGUI.style.display = inventoryGUI.style.display === "none" ? "block" : "none";
-  renderInventory();
+  const isHidden = inventoryGUI.style.display === "none" || inventoryGUI.style.display === "";
+  inventoryGUI.style.display = isHidden ? "block" : "none";
+  if (isHidden) renderInventory();
 });
 
 // Renderowanie ekwipunku
@@ -82,5 +83,3 @@ inventory = [
   { id: 3, name: "Pistolet", value: 45.00 },
   { id: 4, name: "Rękawice", value: 60.00 }
 ];
-
-renderInventory();
