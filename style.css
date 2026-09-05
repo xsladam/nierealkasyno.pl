@@ -1,121 +1,212 @@
-```css
-.inventory {
-    z-index: 9999;
-    max-height: 70vh;
-    overflow-y: auto;
+* {
+    box-sizing: border-box;
 }
 
-.inventory-item {
-    background: #132b5c;
-    padding: 18px;
-    border-radius: 10px;
-    text-align: center;
-    border: 2px solid #31548d;
-}
-
-.inventory-item.red {
-    border-color: #ff4444;
-}
-
-.inventory-item.purple {
-    border-color: #a855f7;
-}
-
-.inventory-item.pink {
-    border-color: #ec4899;
-}
-
-.inventory-item.blue {
-    border-color: #3b82f6;
-}
-
-.inventory-item-name {
-    font-weight: bold;
-    margin-bottom: 10px;
-}
-
-.inventory-item-price {
-    color: #c8f7c5;
-    margin-bottom: 10px;
-}
-
-.sell-item {
-    border: none;
-    border-radius: 6px;
-    padding: 8px 15px;
-    cursor: pointer;
-    background: #1b2838;
+body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
+    background: #07111f;
     color: white;
 }
 
-.sell-item:hover {
-    background: #2a475e;
-}
-
-.empty-inventory {
-    text-align: center;
-    padding: 30px;
-    color: #9bb0d1;
-}
-
-.case-roll.rolling {
-    animation: shake 0.1s infinite;
-}
-
-@keyframes shake {
-    0% {
-        transform: translateX(-5px);
-    }
-
-    50% {
-        transform: translateX(5px);
-    }
-
-    100% {
-        transform: translateX(-5px);
-    }
-}
-
-.won-item {
-    width: 300px;
+.container {
+    width: 100%;
+    max-width: 900px;
     margin: auto;
+    padding: 25px;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+.logo span {
+    color: #4ade80;
+}
+
+.reset-btn {
+    background: #182638;
+    border: 1px solid #293b52;
+    color: #aebed0;
+    padding: 9px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.reset-btn:hover {
+    background: #22334a;
+}
+
+.balance-card {
+    background: linear-gradient(135deg, #10253d, #0c1929);
+    border: 1px solid #213b57;
+    border-radius: 18px;
     padding: 30px;
-    background: #132b5c;
-    border-radius: 12px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, .25);
+}
+
+.balance-card p {
+    margin: 0;
+    color: #8fa4ba;
+    font-size: 14px;
+}
+
+.balance-card h1 {
+    margin: 10px 0 25px;
+    font-size: 46px;
+}
+
+.balance-bottom {
+    display: flex;
+    justify-content: space-between;
+    color: #71879d;
+    font-size: 13px;
+}
+
+.status {
+    color: #4ade80;
+}
+
+.actions {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.actions button {
+    padding: 15px;
+    border: none;
+    border-radius: 10px;
+    background: #17324c;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.actions button:hover {
+    background: #214767;
+}
+
+.custom-add {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.custom-add input {
+    flex: 1;
+    padding: 14px;
+    border-radius: 9px;
+    border: 1px solid #293f56;
+    background: #0d1c2d;
+    color: white;
+    outline: none;
+}
+
+.custom-add button {
+    padding: 14px 20px;
+    border: none;
+    border-radius: 9px;
+    background: #22c55e;
+    color: #06120a;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.custom-add button:hover {
+    background: #4ade80;
+}
+
+.history {
+    margin-top: 35px;
+    background: #0c1929;
+    border: 1px solid #1d3045;
+    border-radius: 15px;
+    padding: 22px;
+}
+
+.history-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.history-header h2 {
+    margin: 0;
+}
+
+.history-header button {
+    background: transparent;
+    color: #71879d;
+    border: none;
+    cursor: pointer;
+}
+
+.transaction {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 0;
+    border-bottom: 1px solid #182a3d;
+}
+
+.transaction:last-child {
+    border-bottom: none;
+}
+
+.transaction-name {
+    color: #d5e0ea;
+}
+
+.transaction-time {
+    color: #667c92;
+    font-size: 12px;
+    margin-top: 4px;
+}
+
+.transaction-amount {
+    color: #4ade80;
+    font-weight: bold;
+}
+
+.empty {
+    padding: 30px 0;
     text-align: center;
-    border: 2px solid #3b82f6;
+    color: #60758a;
 }
 
-.won-item.red {
-    border-color: #ff4444;
+footer {
+    text-align: center;
+    margin-top: 30px;
+    color: #53677b;
+    font-size: 12px;
 }
 
-.won-item.purple {
-    border-color: #a855f7;
-}
+@media (max-width: 600px) {
 
-.won-item.pink {
-    border-color: #ec4899;
-}
+    .container {
+        padding: 15px;
+    }
 
-.won-item.blue {
-    border-color: #3b82f6;
-}
+    .balance-card h1 {
+        font-size: 36px;
+    }
 
-.won-label {
-    color: #9bb0d1;
-    margin-bottom: 10px;
-}
+    .actions {
+        grid-template-columns: 1fr;
+    }
 
-.won-name {
-    font-size: 20px;
-    font-weight: bold;
-    margin-bottom: 10px;
+    .custom-add {
+        flex-direction: column;
+    }
 }
-
-.won-price {
-    color: #c8f7c5;
-    font-size: 18px;
-    font-weight: bold;
-}
-```
