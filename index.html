@@ -1,72 +1,80 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-  <meta charset="UTF-8">
-  <title>Symulator skrzynek</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fake Balance</title>
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-  <nav class="navbar">
-    <div class="nav-left">
-      <a href="#" id="nav-cases" class="active">Skrzynki</a>
-      <a href="#">Upgrader</a>
-      <a href="#">Case Battle</a>
-      <a href="#">Exchanger</a>
+    <div class="container">
+
+        <header>
+            <div class="logo">FAKE<span>BALANCE</span></div>
+            <button id="resetBtn" class="reset-btn">Resetuj konto</button>
+        </header>
+
+        <main>
+
+            <div class="balance-card">
+                <p>Twoje saldo</p>
+                <h1 id="balance">250,00 zł</h1>
+
+                <div class="balance-bottom">
+                    <span>Wirtualne środki</span>
+                    <span class="status">● DEMO</span>
+                </div>
+            </div>
+
+            <div class="actions">
+
+                <button id="add10">+10 zł</button>
+                <button id="add50">+50 zł</button>
+                <button id="add100">+100 zł</button>
+
+            </div>
+
+            <div class="custom-add">
+
+                <input
+                    type="number"
+                    id="customAmount"
+                    placeholder="Wpisz kwotę"
+                    min="1"
+                >
+
+                <button id="addCustom">
+                    Dodaj środki
+                </button>
+
+            </div>
+
+            <section class="history">
+
+                <div class="history-header">
+                    <h2>Historia</h2>
+                    <button id="clearHistory">Wyczyść</button>
+                </div>
+
+                <div id="transactions">
+                    <div class="empty">
+                        Brak transakcji
+                    </div>
+                </div>
+
+            </section>
+
+        </main>
+
+        <footer>
+            To jest wyłącznie symulator. Środki nie mają wartości pieniężnej.
+        </footer>
+
     </div>
 
-    <div class="nav-right">
-      <button id="steam-login" class="login-btn">Zaloguj przez Steam</button>
-      <div class="balance" id="balance" style="display:none;">0,00 zł</div>
-      <div class="avatar" id="avatar" style="display:none;"></div>
-      <div class="settings" id="settings" style="display:none;"></div>
-    </div>
-  </nav>
+    <script src="script.js"></script>
 
-  <section class="cases">
-    <h2>Regular Cases</h2>
-  </section>
-
-  <!-- MINIATURA SKRZYNKI -->
-  <section id="case-preview" class="case-preview">
-    <h2 class="case-title">Tania Skrzynia</h2>
-
-    <div class="case-box">
-      <img src="https://i.imgur.com/4YFZtqE.png" alt="Tania Skrzynia" class="case-image" id="case-click">
-      <p class="case-price">20 zł</p>
-    </div>
-  </section>
-
-  <!-- PEŁNY WIDOK OTWARCIA -->
-  <section id="case-open" class="case-open" style="display:none;">
-    <a href="#" id="back-to-cases" class="back-link">← Powrót do skrzynek</a>
-
-    <h2 class="case-title">Tania Skrzynia</h2>
-    <p class="case-price">20 zł</p>
-
-    <div class="case-roll">
-      <div class="item">AK‑47 | Redline</div>
-      <div class="item">M4A4 | Evil Daimyo</div>
-      <div class="item">AWP | Atheris</div>
-      <div class="item">USP‑S | Cortex</div>
-      <div class="item">P250 | Valence</div>
-    </div>
-
-    <button id="open-case" class="open-btn">Otwórz za 20 zł</button>
-  </section>
-
-  <!-- GUI EKWIPUNKU -->
-  <div id="inventory-gui" class="inventory" style="display:none;">
-    <div class="inventory-header">
-      <button id="sell-all" class="sell-btn">Sprzedaj wszystko</button>
-      <select id="sort-items" class="sort-select">
-        <option value="newest">Od najnowszych</option>
-        <option value="expensive">Od najdroższych</option>
-      </select>
-    </div>
-    <div id="inventory-items" class="inventory-items"></div>
-  </div>
-
-  <script src="script.js"></script>
 </body>
 </html>
