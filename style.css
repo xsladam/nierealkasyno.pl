@@ -1,179 +1,141 @@
-body {
-  margin: 0;
-  font-family: 'Segoe UI', sans-serif;
-  background-color: #071a3c;
-  color: #fff;
+/* EKWIPUNEK */
+
+.inventory {
+  z-index: 100;
+  max-height: 70vh;
+  overflow-y: auto;
 }
 
-/* NAVBAR */
-.navbar {
+.inventory-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #04122b;
-  padding: 10px 40px;
-}
-
-.nav-left a {
-  color: #9bb0d1;
-  text-decoration: none;
-  margin-right: 25px;
-  font-weight: 500;
-  transition: color 0.3s;
-}
-
-.nav-left a.active,
-.nav-left a:hover {
-  color: #fff;
-}
-
-.nav-right {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-}
-
-/* LOGIN */
-.login-btn {
-  background-color: #1b2838;
-  color: #c7d5e0;
-  padding: 10px 18px;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: 0.2s;
-}
-
-.login-btn:hover {
-  background-color: #2a475e;
-}
-
-/* BALANCE */
-.balance {
-  padding: 6px 14px;
-  background-color: #1f4b2e;
-  border-radius: 999px;
-  color: #c8f7c5;
-  font-weight: 600;
-}
-
-/* AVATAR */
-.avatar {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background-image: url('https://flagcdn.com/w320/pl.png');
-  background-size: cover;
-  border: 2px solid white;
-  cursor: pointer;
-}
-
-/* REGULAR CASES TITLE */
-.cases h2 {
-  font-size: 24px;
-  text-align: center;
-  margin-top: 20px;
-}
-
-/* INVENTORY */
-.inventory {
-  position: fixed;
-  top: 80px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 80%;
-  background-color: #0b1f45;
-  border-radius: 10px;
-  padding: 20px;
+  margin-bottom: 20px;
 }
 
 .inventory-items {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
   gap: 15px;
 }
 
-.item {
-  background-color: #132b5c;
-  padding: 10px;
-  border-radius: 8px;
-  text-align: center;
-}
-
-/* MINIATURA SKRZYNKI */
-.case-preview {
-  text-align: center;
-  margin-top: 40px;
-}
-
-.case-box {
-  display: inline-block;
-  background-color: #0b1f45;
-  padding: 20px;
+.inventory-item {
+  background: #132b5c;
+  padding: 18px;
   border-radius: 10px;
-  box-shadow: 0 0 15px rgba(0,0,0,0.4);
-  cursor: pointer;
-  transition: 0.2s;
-}
-
-.case-box:hover {
-  transform: scale(1.05);
-}
-
-.case-image {
-  width: 160px;
-  border-radius: 8px;
-}
-
-.case-price {
-  margin-top: 10px;
-  font-weight: 600;
-  color: #c8f7c5;
-}
-
-/* PEŁNY WIDOK OTWARCIA */
-.case-open {
   text-align: center;
-  margin-top: 40px;
+  border: 2px solid transparent;
 }
 
-.back-link {
-  display: inline-block;
-  margin-bottom: 20px;
-  color: #9bb0d1;
-  text-decoration: none;
+.inventory-item.red {
+  border-color: #ff4b4b;
+}
+
+.inventory-item.purple {
+  border-color: #a855f7;
+}
+
+.inventory-item.pink {
+  border-color: #ec4899;
+}
+
+.inventory-item.blue {
+  border-color: #3b82f6;
+}
+
+.inventory-item-name {
   font-weight: 600;
+  margin-bottom: 10px;
 }
 
-.back-link:hover {
-  color: #fff;
+.inventory-item-price {
+  color: #c8f7c5;
+  margin-bottom: 12px;
 }
 
-.case-roll {
-  display: flex;
-  justify-content: center;
-  gap: 15px;
-  margin: 20px 0;
-}
-
-.case-roll .item {
-  background-color: #132b5c;
-  padding: 10px;
-  border-radius: 8px;
-  width: 120px;
-}
-
-/* BUTTONY */
-.open-btn {
-  background-color: #1b2838;
-  color: #c7d5e0;
-  padding: 10px 18px;
+.sell-item {
   border: none;
   border-radius: 6px;
+  padding: 7px 12px;
   cursor: pointer;
-  margin-top: 10px;
+  background: #1b2838;
+  color: white;
 }
 
-.open-btn:hover {
-  background-color: #2a475e;
+.sell-item:hover {
+  background: #2a475e;
+}
+
+.empty-inventory {
+  text-align: center;
+  padding: 40px;
+  color: #9bb0d1;
+}
+
+
+/* ANIMACJA SKRZYNKI */
+
+.case-roll.rolling {
+  animation: rollAnimation 0.15s infinite;
+}
+
+@keyframes rollAnimation {
+  0% {
+    transform: translateX(-5px);
+  }
+
+  50% {
+    transform: translateX(5px);
+  }
+
+  100% {
+    transform: translateX(-5px);
+  }
+}
+
+
+/* WYGRANA */
+
+.won-item {
+  width: 300px;
+  padding: 30px;
+  margin: auto;
+  background: #132b5c;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 0 25px rgba(0,0,0,0.4);
+}
+
+.won-label {
+  font-size: 13px;
+  color: #9bb0d1;
+  margin-bottom: 10px;
+}
+
+.won-name {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.won-price {
+  color: #c8f7c5;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.won-item.red {
+  border: 2px solid #ff4b4b;
+}
+
+.won-item.purple {
+  border: 2px solid #a855f7;
+}
+
+.won-item.pink {
+  border: 2px solid #ec4899;
+}
+
+.won-item.blue {
+  border: 2px solid #3b82f6;
 }
