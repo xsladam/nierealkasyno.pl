@@ -1,373 +1,151 @@
-```javascript
-document.addEventListener("DOMContentLoaded", () => {
+let balance = Number(localStorage.getItem("fakeBalance"));
 
-    // ELEMENTY
-    const loginBtn = document.getElementById("steam-login");
-    const balanceEl = document.getElementById("balance");
-    const avatar = document.getElementById("avatar");
+if (!balance) {
+    balance = 250;
+    localStorage.setItem("fakeBalance", balance);
+}
 
-    const casePreview = document.getElementById("case-preview");
-    const caseOpen = document.getElementById("case-open");
-    const caseClick = document.getElementById("case-click");
-    const backBtn = document.getElementById("back-to-cases");
-    const openBtn = document.getElementById("open-case");
+let transactions = JSON.parse(
+    localStorage.getItem("fakeTransactions") || "[]"
+);
 
-    const inventoryGUI = document.getElementById("inventory-gui");
-    const inventoryItems = document.getElementById("inventory-items");
-    const sellAllBtn = document.getElementById("sell-all");
-    const sortSelect = document.getElementById("sort-items");
+const balanceElement = document.getElementById("balance");
+const transactionsElement = document.getElementById("transactions");
 
-    // DANE
-    const CASE_PRICE = 20;
+function updateBalance() {
 
-    const items = [
-        {
-            name: "AK-47 | Redline",
-            price: 35,
-            rarity: "red"
-        },
-        {
-            name: "M4A4 | Evil Daimyo",
-            price: 28,
-            rarity: "purple"
-        },
-        {
-            name: "AWP | Atheris",
-            price: 22,
-            rarity: "blue"
-        },
-        {
-            name: "USP-S | Cortex",
-            price: 18,
-            rarity: "pink"
-        },
-        {
-            name: "P250 | Valence",
-            price: 10,
-            rarity: "blue"
-        }
-    ];
+    balanceElement.textContent =
+        balance.toLocaleString("pl-PL", {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
+        }) + " zł";
 
-    let balance = Number(localStorage.getItem("balance")) || 0;
+    localStorage.setItem("fakeBalance", balance);
+}
 
-    let inventory = JSON.parse(
-        localStorage.getItem("inventory") || "[]"
-    );
+function addMoney(amount) {
 
+    balance += amount;
 
-    // =========================
-    // SALDO
-    // =========================
-
-    function updateBalance() {
-        balanceEl.textContent = balance.toFixed(2) + " zł";
-        localStorage.setItem("balance", balance);
-    }
-
-
-    // =========================
-    // LOGOWANIE
-    // =========================
-
-    function login() {
-
-        localStorage.setItem("logged", "true");
-
-        if (balance <= 0) {
-            balance = 250;
-        }
-
-        localStorage.setItem("balance", balance);
-
-        loginBtn.style.display = "none";
-        balanceEl.style.display = "flex";
-        avatar.style.display = "block";
-
-        updateBalance();
-    }
-
-
-    if (localStorage.getItem("logged") === "true") {
-        login();
-    }
-
-
-    loginBtn.addEventListener("click", login);
-
-
-    // =========================
-    // OTWIERANIE WIDOKU SKRZYNKI
-    // =========================
-
-    caseClick.addEventListener("click", () => {
-
-        console.log("Kliknięto skrzynkę");
-
-        casePreview.style.display = "none";
-        caseOpen.style.display = "block";
-
+    transactions.unshift({
+        amount: amount,
+        date: new Date().toLocaleTimeString("pl-PL", {
+            hour: "2-digit",
+            minute: "2-digit"
+        })
     });
 
-
-    // =========================
-    // POWRÓT
-    // =========================
-
-    backBtn.addEventListener("click", (e) => {
-
-        e.preventDefault();
-
-        caseOpen.style.display = "none";
-        casePreview.style.display = "block";
-
-    });
-
-
-    // =========================
-    // LOSOWANIE
-    // =========================
-
-    function randomItem() {
-
-        const random = Math.random();
-
-        if (random < 0.05) {
-            return items[0];
-        }
-
-        if (random < 0.15) {
-            return items[1];
-        }
-
-        if (random < 0.40) {
-            return items[2];
-        }
-
-        if (random < 0.70) {
-            return items[3];
-        }
-
-        return items[4];
-    }
-
-
-    // =========================
-    // OTWIERANIE SKRZYNKI
-    // =========================
-
-    openBtn.addEventListener("click", () => {
-
-        if (localStorage.getItem("logged") !== "true") {
-            alert("Najpierw kliknij „Zaloguj przez Steam”.");
-            return;
-        }
-
-        if (balance < CASE_PRICE) {
-            alert("Nie masz wystarczająco dużo pieniędzy.");
-            return;
-        }
-
-        balance -= CASE_PRICE;
-        updateBalance();
-
-        openBtn.disabled = true;
-        openBtn.textContent = "Losowanie...";
-
-        const roll = document.querySelector(".case-roll");
-
-        roll.classList.add("rolling");
-
-        setTimeout(() => {
-
-            const item = randomItem();
-
-            const newItem = {
-                id: Date.now(),
-                name: item.name,
-                price: item.price,
-                rarity: item.rarity
-            };
-
-            inventory.push(newItem);
-
-            localStorage.setItem(
-                "inventory",
-                JSON.stringify(inventory)
-            );
-
-            roll.classList.remove("rolling");
-
-            roll.innerHTML = `
-                <div class="won-item ${item.rarity}">
-                    <div class="won-label">WYGRAŁEŚ</div>
-                    <div class="won-name">${item.name}</div>
-                    <div class="won-price">
-                        ${item.price.toFixed(2)} zł
-                    </div>
-                </div>
-            `;
-
-            openBtn.disabled = false;
-            openBtn.textContent = "Otwórz ponownie za 20 zł";
-
-            renderInventory();
-
-        }, 2000);
-
-    });
-
-
-    // =========================
-    // EKWIPUNEK
-    // =========================
-
-    function renderInventory() {
-
-        inventoryItems.innerHTML = "";
-
-        if (inventory.length === 0) {
-
-            inventoryItems.innerHTML = `
-                <div class="empty-inventory">
-                    Ekwipunek jest pusty
-                </div>
-            `;
-
-            return;
-        }
-
-        let list = [...inventory];
-
-        if (sortSelect.value === "expensive") {
-
-            list.sort((a, b) => b.price - a.price);
-
-        } else {
-
-            list.reverse();
-
-        }
-
-        list.forEach(item => {
-
-            const div = document.createElement("div");
-
-            div.className = `inventory-item ${item.rarity}`;
-
-            div.innerHTML = `
-                <div class="inventory-item-name">
-                    ${item.name}
-                </div>
-
-                <div class="inventory-item-price">
-                    ${item.price.toFixed(2)} zł
-                </div>
-
-                <button class="sell-item">
-                    Sprzedaj
-                </button>
-            `;
-
-            div.querySelector(".sell-item")
-                .addEventListener("click", () => {
-
-                    sellItem(item.id);
-
-                });
-
-            inventoryItems.appendChild(div);
-
-        });
-
-    }
-
-
-    // =========================
-    // OTWIERANIE EKWIPUNKU
-    // =========================
-
-    avatar.addEventListener("click", () => {
-
-        if (inventoryGUI.style.display === "block") {
-
-            inventoryGUI.style.display = "none";
-
-        } else {
-
-            inventoryGUI.style.display = "block";
-            renderInventory();
-
-        }
-
-    });
-
-
-    // =========================
-    // SPRZEDAŻ
-    // =========================
-
-    function sellItem(id) {
-
-        const index = inventory.findIndex(
-            item => item.id === id
-        );
-
-        if (index === -1) {
-            return;
-        }
-
-        balance += inventory[index].price;
-
-        inventory.splice(index, 1);
-
-        localStorage.setItem(
-            "inventory",
-            JSON.stringify(inventory)
-        );
-
-        updateBalance();
-        renderInventory();
-
-    }
-
-
-    // =========================
-    // SPRZEDAJ WSZYSTKO
-    // =========================
-
-    sellAllBtn.addEventListener("click", () => {
-
-        let total = 0;
-
-        inventory.forEach(item => {
-            total += item.price;
-        });
-
-        balance += total;
-
-        inventory = [];
-
-        localStorage.setItem(
-            "inventory",
-            JSON.stringify(inventory)
-        );
-
-        updateBalance();
-        renderInventory();
-
-    });
-
-
-    // =========================
-    // SORTOWANIE
-    // =========================
-
-    sortSelect.addEventListener("change", renderInventory);
-
-
-    // START
+    save();
     updateBalance();
-    renderInventory();
+    renderTransactions();
+}
 
-});
-```
+function save() {
+
+    localStorage.setItem(
+        "fakeTransactions",
+        JSON.stringify(transactions)
+    );
+}
+
+function renderTransactions() {
+
+    if (transactions.length === 0) {
+
+        transactionsElement.innerHTML = `
+            <div class="empty">
+                Brak transakcji
+            </div>
+        `;
+
+        return;
+    }
+
+    transactionsElement.innerHTML = "";
+
+    transactions.forEach(transaction => {
+
+        const element = document.createElement("div");
+
+        element.className = "transaction";
+
+        element.innerHTML = `
+            <div>
+                <div class="transaction-name">
+                    Dodano wirtualne środki
+                </div>
+
+                <div class="transaction-time">
+                    ${transaction.date}
+                </div>
+            </div>
+
+            <div class="transaction-amount">
+                +${transaction.amount.toFixed(2)} zł
+            </div>
+        `;
+
+        transactionsElement.appendChild(element);
+    });
+}
+
+document.getElementById("add10").addEventListener(
+    "click",
+    () => addMoney(10)
+);
+
+document.getElementById("add50").addEventListener(
+    "click",
+    () => addMoney(50)
+);
+
+document.getElementById("add100").addEventListener(
+    "click",
+    () => addMoney(100)
+);
+
+document.getElementById("addCustom").addEventListener(
+    "click",
+    () => {
+
+        const input = document.getElementById("customAmount");
+
+        const amount = Number(input.value);
+
+        if (!amount || amount <= 0) {
+            alert("Wpisz poprawną kwotę.");
+            return;
+        }
+
+        addMoney(amount);
+
+        input.value = "";
+    }
+);
+
+document.getElementById("clearHistory").addEventListener(
+    "click",
+    () => {
+
+        transactions = [];
+
+        save();
+        renderTransactions();
+    }
+);
+
+document.getElementById("resetBtn").addEventListener(
+    "click",
+    () => {
+
+        balance = 250;
+        transactions = [];
+
+        save();
+        updateBalance();
+        renderTransactions();
+    }
+);
+
+updateBalance();
+renderTransactions();
